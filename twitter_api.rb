@@ -2,6 +2,9 @@ require "net/http"
 require "json"
 
 module TwitterAPI
+
+  TWITTERAPI_BASE_URL = "api.twitter.com"
+
   def self.get_trends(woeid=1)
     get_http "/1/trends/#{woeid}"
   end
@@ -19,9 +22,10 @@ module TwitterAPI
   end
 
   def self.get_http(entity,query='')
-    response = Net::HTTP.get_response("api.twitter.com","#{entity}.json?#{query}")
+    response = Net::HTTP.get_response(TWITTERAPI_BASE_URL,"#{entity}.json?#{query}")
     JSON.parse(response.body)
   end
+
 end
 
 

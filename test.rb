@@ -1,27 +1,16 @@
 require_relative 'twitter_api'
 require_relative 'twitter_crawler'
+require_relative 'utils'
+require_relative 'twitter'
+require_relative 'user'
+require_relative 'twit'
 
-def get_links(text)
-  url_regexp = /(ht|f)tp(s?):\/\/\w/
-  text.split.grep(url_regexp)
-end
-
-def ask_number(from, to, prompt)
-  option_selected = -1
-  while true
-    print "#{prompt} [#{from}..#{to}]: "
-    option_selected = gets.strip.to_i
-    if option_selected.between?(from, to)
-      return option_selected
-    end
-  end
-  
-end
-
-trends = TwitterAPI.get_trends
 print "\n\nTwitter Trends Topics - David Giordano\n\n"
 
 puts "-------------\n"
+
+twitter = Twitter.new
+trends = twitter.get_trends
 
 trends.each{|e|
   e["trends"].each_with_index.map{|t, index|
@@ -41,13 +30,13 @@ trends.each{|e|
 
   puts "-------------\n\n"
 
-  twit_info = TwitterAPI.get_twit_by_id(twitts_trend["results"][option]["id"])
-  user_info = TwitterAPI.get_user_information_by_id(twit_info["user"]["id"])
+  twit = Twit.new(twitts_trend["results"][option]["id"])
+  user = User.new(twit.user_id)
 
-  puts "@#{user_info["screen_name"]} \"#{user_info["name"]}\" Followers[#{user_info["followers_count"]}] #{twit_info["created_at"]}\n"
-  puts "\n#{twit_info["text"]}\n"
+  puts "@#{user.screen_name} \"#{user.name}\" Followers[#{user.followers_count}] #{twit.created_at}\n"
+  puts "\n#{twit.text}\n"
 
-  links = get_links(twit_info["text"])
+  links = twit.links
   if links.length > 0
     puts "\nLinks:\n"
 
