@@ -48,7 +48,7 @@ module TwitterCrawler
       found = true 
     end 
 
-    return {"url" => url, "response" => response}
+    {"url" => url, "response" => response}
   end
 
 end

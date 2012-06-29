@@ -1,30 +1,23 @@
 
 class User
 
-  attr_accessor :id, :screen_name, :name, :followers_count, :user_response
+  attr_accessor :id, :screen_name, :name, :followers_count
 
   def initialize(id)
     @id = id
-    @user_response = TwitterAPI.get_user_information_by_id(id)
+    get_data
   end
 
-  def id
-    @id
-  end 
-
-  def screen_name
-    @screen_name = @user_response["screen_name"] if @screen_name.nil?
-    return @screen_name
+  def refresh
+    get_data
   end
 
-  def name
-    @name = @user_response["name"] if @name.nil?
-    return @name
-  end
-
-  def followers_count
-    @followers_count = @user_response["followers_count"] if @followers_count.nil?
-    return @followers_count
+  private
+  def get_data
+    user_response = TwitterAPI.get_user_information_by_id(@id)
+    @screen_name = user_response["screen_name"]
+    @name = user_response["name"]
+    @followers_count = user_response["followers_count"]
   end
 
 end

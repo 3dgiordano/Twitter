@@ -21,6 +21,7 @@ module TwitterAPI
     get_http "/1/users/show", "id=#{user_id}"
   end
 
+  private
   def self.get_http(entity,query='')
     response = Net::HTTP.get_response(TWITTERAPI_BASE_URL,"#{entity}.json?#{query}")
     JSON.parse(response.body)

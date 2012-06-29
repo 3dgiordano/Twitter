@@ -14,7 +14,7 @@ class Trend
     result = []
     twits_api = TwitterAPI.get_twits_for_trend(@query)
     twits_api["results"].each{|t| result << Twit.new(t["id"]) }
-    return result
+    result
   end
 
 end

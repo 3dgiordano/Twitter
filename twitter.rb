@@ -11,5 +11,4 @@ class Twitter
      return result
   end
   
-  
 end
