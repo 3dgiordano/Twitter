@@ -1,4 +1,5 @@
 require_relative 'utils'
+require_relative 'user'
 
 class Twit
 
@@ -27,5 +28,9 @@ class Twit
   def links
     @links = get_links(self.text) if @links.nil?
     return @links
+  end
+
+  def get_user
+     User.new(self.user_id)
   end
 end

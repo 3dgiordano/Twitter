@@ -1,37 +1,33 @@
-require_relative 'twitter_api'
 require_relative 'twitter_crawler'
 require_relative 'utils'
 require_relative 'twitter'
-require_relative 'user'
-require_relative 'twit'
 
-print "\n\nTwitter Trends Topics - David Giordano\n\n"
+  print "\n\nTwitter Trends Topics - David Giordano\n\n"
 
-puts "-------------\n"
+  puts "-------------\n"
 
-twitter = Twitter.new
-trends = twitter.get_trends
+  twitter = Twitter.new
+  trends = twitter.get_trends
 
-trends.each{|e|
-  e["trends"].each_with_index.map{|t, index|
-    print "  #{index} : Name:#{t["name"]}\n"
+  trends.each_with_index.map{|t, index|
+    print "  #{index} : Name:#{t.name}\n"
   }
-  option = ask_number(0, e["trends"].length-1, "\nSelect Trend Topic:")
+  option = ask_number(0, trends.length-1, "\nSelect Trend Topic:")
 
   puts "-------------\n\n"
  
-  twitts_trend = TwitterAPI.get_twits_for_trend(e["trends"][option]["query"])
+  twitts_trend = trends[option].get_twits
 
-  twitts_trend["results"].each_with_index.map{|r, index|
-    print "  #{index} : Twitt: #{r["text"][0,60]}...\n"
+  twitts_trend.each_with_index.map{|r, index|
+    print "  #{index} : Twitt: #{r.text[0,60]}...\n"
   }
 
-  option = ask_number(0, twitts_trend["results"].length-1, "\nSelect Twitt:")
+  option = ask_number(0, twitts_trend.length-1, "\nSelect Twitt:")
 
   puts "-------------\n\n"
 
-  twit = Twit.new(twitts_trend["results"][option]["id"])
-  user = User.new(twit.user_id)
+  twit = twitts_trend[option]
+  user = twitts_trend[option].get_user
 
   puts "@#{user.screen_name} \"#{user.name}\" Followers[#{user.followers_count}] #{twit.created_at}\n"
   puts "\n#{twit.text}\n"
@@ -51,6 +47,4 @@ trends.each{|e|
 
   end
   puts "-------------\n\n"
-
-}
 
