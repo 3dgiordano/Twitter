@@ -94,7 +94,7 @@ class TestTwitter < Test::Unit::TestCase
     user = twit.get_user
     assert user.is_a? User
   end
-  
+
   def test_twit_class_notfound
     assert_raise TypeError do
         twit = Twit.new(220289460208799745111111111)
