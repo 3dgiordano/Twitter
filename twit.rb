@@ -21,6 +21,7 @@ class Twit
   private
   def get_data
     twit_response = TwitterAPI.get_twit_by_id(@id)
+    raise if twit_response.include?("errors")
     @text = twit_response["text"]
     @user_id = twit_response["user"]["id"]
     @created_at = twit_response["created_at"]

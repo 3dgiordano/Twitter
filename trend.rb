@@ -13,6 +13,7 @@ class Trend
   def get_twits
     result = []
     twits_api = TwitterAPI.get_twits_for_trend(@query)
+    return result if twits_api.include?("errors")
     twits_api["results"].each{|t| result << Twit.new(t["id"]) }
     result
   end
