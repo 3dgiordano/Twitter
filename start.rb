@@ -12,7 +12,7 @@ require_relative 'twitter'
   trends.each_with_index.map{|t, index|
     print "  #{index} : Name:#{t.name}\n"
   }
-  option = ask_number(0, trends.length-1, "\nSelect Trend Topic:")
+  option = Utils.ask_number(0, trends.length-1, "\nSelect Trend Topic:")
 
   puts "-------------\n\n"
  
@@ -22,7 +22,7 @@ require_relative 'twitter'
     print "  #{index} : Twitt: #{r.text[0,60]}...\n"
   }
 
-  option = ask_number(0, twitts_trend.length-1, "\nSelect Twitt:")
+  option = Utils.ask_number(0, twitts_trend.length-1, "\nSelect Twitt:")
 
   puts "-------------\n\n"
 
@@ -39,7 +39,7 @@ require_relative 'twitter'
     links.each_with_index.map{|l, index|
        print "  #{index} : #{l[0,60]}\n"
     }
-    option = ask_number(0, links.length-1, "\nSelect Link:")
+    option = Utils.ask_number(0, links.length-1, "\nSelect Link:")
 
     puts "\nLink selected:", links[option], "\n"
     puts "-------------\n\n"

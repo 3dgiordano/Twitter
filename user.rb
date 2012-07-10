@@ -1,3 +1,4 @@
+require_relative 'twitter_api'
 
 class User
 

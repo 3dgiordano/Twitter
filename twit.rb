@@ -26,7 +26,7 @@ class Twit
     @text = twit_response["text"]
     @user_id = twit_response["user"]["id"]
     @created_at = twit_response["created_at"]
-    @links = get_links(@text)
+    @links = Utils.get_links(@text)
   end
 
 end
