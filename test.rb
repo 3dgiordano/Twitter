@@ -22,12 +22,6 @@ class TestTwitter < Test::Unit::TestCase
   end
   
   # TwitterAPI Twitts
-  def test_twitter_api_twits_for_trend_argument_error
-    assert_raise ArgumentError do
-      TwitterAPI.get_twits_for_trend(123456)
-    end
-  end
-  
   def test_twitter_api_twits_for_trend_result
     assert TwitterAPI.get_twits_for_trend("Jackson").length > 0
   end
@@ -79,7 +73,7 @@ class TestTwitter < Test::Unit::TestCase
 
   # Trend class
   def test_trend_class_get_twits
-    trend = Trend.new("Test","Jackson")
+    trend = Trend.new("Test","Jackson","")
     twits = trend.get_twits
     if twits.length > 0
         assert twits[0].is_a? Twit 

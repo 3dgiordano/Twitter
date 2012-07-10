@@ -1,3 +1,4 @@
+require_relative 'twitter_api'
 require_relative 'utils'
 require_relative 'user'
 

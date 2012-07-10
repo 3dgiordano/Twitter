@@ -3,11 +3,12 @@ require_relative 'twit'
 
 class Trend
 
-  attr_accessor :name, :query
+  attr_accessor :name, :query, :as_of
 
-  def initialize(name, query)
+  def initialize(name, query, as_of)
     @name = name
     @query = query
+    @as_of = as_of
   end
 
   def get_twits
